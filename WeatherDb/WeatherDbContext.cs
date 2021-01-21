@@ -19,20 +19,20 @@ namespace WeatherDb
         private readonly ILoggerFactory loggerFactory;
 
         //Or you could create your own LoggerFactory
-        public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
-            builder
-                .AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
-                .AddConsole());
+        //public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
+        //    builder
+        //        .AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
+        //        .AddConsole());
 
         public DatabaseFacade DatabaseAccessor => Database;
 
-        public WeatherDbContext(DbContextOptions<WeatherDbContext> options, ILoggerFactory loggerFactory)
-         : base(options) => this.loggerFactory = loggerFactory;
+        public WeatherDbContext(DbContextOptions<WeatherDbContext> options/*, ILoggerFactory loggerFactory*/)
+         : base(options) { }//=> this.loggerFactory = loggerFactory;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseLoggerFactory(MyLoggerFactory);
-            optionsBuilder.UseLoggerFactory(loggerFactory);
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

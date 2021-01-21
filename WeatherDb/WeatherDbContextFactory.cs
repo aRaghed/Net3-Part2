@@ -10,7 +10,7 @@ namespace WeatherDb
             var optionsBuilder = new DbContextOptionsBuilder<WeatherDbContext>();
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TempWeatherDb;Trusted_Connection=True;MultipleActiveResultSets=true");
 
-            return new WeatherDbContext(optionsBuilder.Options, null);
+            return new WeatherDbContext(optionsBuilder.Options/*, null*/);
         }
     }
 }

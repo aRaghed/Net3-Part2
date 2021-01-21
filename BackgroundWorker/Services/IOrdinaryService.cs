@@ -8,5 +8,7 @@ namespace BackgroundWorker.Services
     public interface IOrdinaryService
     {
         Task<IEnumerable<WeatherForecast>> GetWeatherForecasts();
+
+        Task<WeatherForecast> GetWeatherForecast();
     }
 }

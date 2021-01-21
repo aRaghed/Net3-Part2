@@ -41,5 +41,14 @@ namespace BackgroundWorker.Services
             JsonSerializerOptions options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             return JsonSerializer.Deserialize<IEnumerable<WeatherForecast>>(json, options);
         }
+
+        public async Task<WeatherForecast> GetWeatherForecast()
+        {
+            logger.LogInformation("GetWeatherForecast running at: {time}", DateTimeOffset.Now);
+
+            string json = await secureHttpClient.GetStringAsync("/weatherforecast/now");
+            JsonSerializerOptions options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            return JsonSerializer.Deserialize<WeatherForecast>(json, options);
+        }
     }
 }

@@ -39,13 +39,11 @@ namespace BackgroundWorker
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                var weatherForecasts = await service.GetWeatherForecasts();
+                var weatherForecasts = await weatherDbService.GetLatestHourAsync();
                 foreach (var forecast in weatherForecasts)
                 {
-                    //await weatherDbService.AddWeatherForecastAsync(forecast);
-                    logger.LogInformation("{date} - {summary}, {celcius}C, {farenheit}F", forecast.Date, forecast.Summary, forecast.TemperatureC, forecast.TemperatureF);
+                    logger.LogInformation("Reading from Db: {date} - {summary}, {celcius}C, {farenheit}F", forecast.Date, forecast.Summary, forecast.TemperatureC, forecast.TemperatureF);
                 }
-                logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
                 await Task.Delay(timeSpan, cancellationToken);
             }
