@@ -26,13 +26,13 @@ namespace WeatherDb
 
         public DatabaseFacade DatabaseAccessor => Database;
 
-        public WeatherDbContext(DbContextOptions<WeatherDbContext> options/*, ILoggerFactory loggerFactory*/)
-         : base(options) { }//=> this.loggerFactory = loggerFactory;
+        public WeatherDbContext(DbContextOptions<WeatherDbContext> options, ILoggerFactory loggerFactory)
+         : base(options) => this.loggerFactory = loggerFactory;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseLoggerFactory(MyLoggerFactory);
-            //optionsBuilder.UseLoggerFactory(loggerFactory);
+            optionsBuilder.UseLoggerFactory(loggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
