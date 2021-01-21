@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <!--<TargetFramework>net5.0</TargetFramework>-->
     <UserSecretsId>41d61afe-4b41-4d3d-a869-f5cadda14ca6</UserSecretsId>
   </PropertyGroup>
 
@@ -10,9 +9,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.11" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.11" />
-    <!--<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />-->
   </ItemGroup>
 
   <ItemGroup>
