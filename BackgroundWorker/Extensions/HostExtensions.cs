@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using System.Linq;
+using System;
 
 using WeatherDb.Abstract;
 
@@ -13,21 +12,20 @@ namespace BackgroundWorker.Extensions
     {
         public static IHost EnsureDbExist(this IHost host)
         {
-            using var scope = host.Services.CreateScope();
-            var serviceProvider = scope.ServiceProvider;
+            using IServiceScope scope = host.Services.CreateScope();
+            IServiceProvider serviceProvider = scope.ServiceProvider;
+
+            IHostEnvironment env = serviceProvider.GetService<IHostEnvironment>();
             ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<Program>();
+            IWeatherDbContext dbContext = serviceProvider.GetRequiredService<IWeatherDbContext>();
+
             logger.LogInformation("Migration start");
 
-            var dbContext = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-            var migrations = dbContext.DatabaseAccessor.GetPendingMigrations();
+            dbContext.EnsureDbExists(env.IsDevelopment());
 
-            logger.LogInformation("Applying {migrations} migrations to database", migrations.Count());
-            if (migrations.Any())
-            {
-                dbContext.DatabaseAccessor.Migrate();
-            }
+            logger.LogInformation("Migrations complete");
 
-            logger.LogInformation("Migrations complete"); return host;
+            return host;
         }
     }
 }

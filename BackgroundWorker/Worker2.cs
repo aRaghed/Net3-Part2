@@ -45,6 +45,12 @@ namespace BackgroundWorker
                     logger.LogInformation("Reading from Db: {date} - {summary}, {celcius}C, {farenheit}F", forecast.Date, forecast.Summary, forecast.TemperatureC, forecast.TemperatureF);
                 }
 
+                weatherForecasts = await weatherDbService.GetPeriodAsync(DateTime.Parse("2021-01-01"), DateTime.Parse("2021-01-07"));
+                foreach (var forecast in weatherForecasts)
+                {
+                    logger.LogInformation("Reading from Db: {date} - {summary}, {celcius}C, {farenheit}F", forecast.Date, forecast.Summary, forecast.TemperatureC, forecast.TemperatureF);
+                }
+
                 await Task.Delay(timeSpan, cancellationToken);
             }
         }

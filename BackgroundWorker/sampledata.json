@@ -1,0 +1,37 @@
+[
+  {
+    "Date": "2021-01-01",
+    "TemperatureC": -15,
+    "Summary": "Freezing"
+  },
+  {
+    "Date": "2021-01-02",
+    "TemperatureC": -10,
+    "Summary": "Bracing"
+  },
+  {
+    "Date": "2021-01-03",
+    "TemperatureC": -5,
+    "Summary": "Chilly"
+  },
+  {
+    "Date": "2021-01-04",
+    "TemperatureC": 0,
+    "Summary": "Cool"
+  },
+  {
+    "Date": "2021-01-05",
+    "TemperatureC": 5,
+    "Summary": "Mild"
+  },
+  {
+    "Date": "2021-01-06",
+    "TemperatureC": 10,
+    "Summary": "Warm"
+  },
+  {
+    "Date": "2021-01-07",
+    "TemperatureC": 15,
+    "Summary": "Balmy"
+  }
+]

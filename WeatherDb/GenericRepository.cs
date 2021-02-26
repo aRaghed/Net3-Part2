@@ -7,10 +7,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using WeatherDb.Abstract;
+using WeatherDb.Model;
 
 namespace WeatherDb
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IPOCOClass
     {
         private readonly WeatherDbContext dbContext;
         private readonly DbSet<TEntity> dbSet;
@@ -29,7 +30,7 @@ namespace WeatherDb
 
             if (filter != null)
             {
-                query = query.Where(filter);
+                query = query.Where(filter); //a=>a.Id==1
             }
 
             foreach (string includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
@@ -47,7 +48,7 @@ namespace WeatherDb
             }
         }
 
-        public TEntity GetByID(object id) => dbSet.Find(id);
+        public TEntity GetById(object id) => dbSet.Find(id);
 
         public void Insert(TEntity entity) => dbSet.Add(entity);
 
@@ -59,7 +60,7 @@ namespace WeatherDb
             dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void DeleteByID(object id)
+        public void DeleteById(object id)
         {
             TEntity entityToDelete = dbSet.Find(id);
             Delete(entityToDelete);

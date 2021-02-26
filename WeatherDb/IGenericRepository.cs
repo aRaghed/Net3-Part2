@@ -4,15 +4,17 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+using WeatherDb.Model;
+
 namespace WeatherDb.Abstract
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class, IPOCOClass
     {
         IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
                                      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
                                      string includeProperties = "");
 
-        TEntity GetByID(object id);
+        TEntity GetById(object id);
 
         void Insert(TEntity entity);
 
@@ -20,7 +22,7 @@ namespace WeatherDb.Abstract
 
         void Update(TEntity entity);
 
-        void DeleteByID(object id);
+        void DeleteById(object id);
 
         void Delete(TEntity entityToDelete);
     }
