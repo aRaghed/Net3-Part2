@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MultipleRegistrationsSample
@@ -18,6 +19,8 @@ namespace MultipleRegistrationsSample
 
         public async Task RunAsync()
         {
+            var svc1 = services.FirstOrDefault(s => s is Service1);
+
             foreach (var service in services)
             {
                 if (service is Service1)
